@@ -1,0 +1,81 @@
+{
+  "tasks": [
+    {
+      "id": "task1",
+      "title": "Finalize UI Colors in Meeting",
+      "description": "Review and finalize the color palette for the new design system with the team.",
+      "status": "completed",
+      "priority": "high",
+      "assignedTo": "user1",
+      "dueDate": "2023-03-01",
+      "completedDate": "2023-03-01",
+      "startTime": "09:00"
+    },
+    {
+      "id": "task2",
+      "title": "Change UI Colors",
+      "description": "Update the UI colors based on the feedback from the design team.",
+      "status": "inProgress",
+      "priority": "medium",
+      "assignedTo": "user1",
+      "dueDate": "2023-03-01",
+      "startTime": "10:00"
+    },
+    {
+      "id": "task3",
+      "title": "Submit UI Colors Report",
+      "description": "Prepare and submit a report on the UI color changes and their impact.",
+      "status": "todo",
+      "priority": "low",
+      "assignedTo": "user1",
+      "dueDate": "2023-03-01",
+      "startTime": "11:00"
+    },
+    {
+      "id": "task4",
+      "title": "Create User Flow Diagrams",
+      "description": "Design user flow diagrams for the new checkout process.",
+      "status": "inProgress",
+      "priority": "high",
+      "assignedTo": "user2",
+      "dueDate": "2023-03-05"
+    },
+    {
+      "id": "task5",
+      "title": "Implement Authentication API",
+      "description": "Develop the authentication API endpoints for the mobile app.",
+      "status": "completed",
+      "priority": "high",
+      "assignedTo": "user3",
+      "dueDate": "2023-03-03",
+      "completedDate": "2023-03-02"
+    },
+    {
+      "id": "task6",
+      "title": "Fix Navigation Bug",
+      "description": "Resolve the navigation bug in the mobile app that causes crashes.",
+      "status": "todo",
+      "priority": "high",
+      "assignedTo": "user3",
+      "dueDate": "2023-03-07"
+    },
+    {
+      "id": "task7",
+      "title": "Update Documentation",
+      "description": "Update the API documentation with the latest changes.",
+      "status": "inProgress",
+      "priority": "medium",
+      "assignedTo": "user2",
+      "dueDate": "2023-03-10"
+    },
+    {
+      "id": "task8",
+      "title": "Conduct User Testing",
+      "description": "Organize and conduct user testing sessions for the new features.",
+      "status": "todo",
+      "priority": "medium",
+      "assignedTo": "user1",
+      "dueDate": "2023-03-15"
+    }
+  ]
+}

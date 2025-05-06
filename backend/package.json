@@ -1,0 +1,24 @@
+{
+  "name": "task-elite",
+  "version": "1.0.0",
+  "description": "This is a simple Node.js application that uses MongoDB as its database. The app demonstrates CRUD (Create, Read, Update, Delete) operations using Express.js and Mongoose.",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.14.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

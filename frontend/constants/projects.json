@@ -1,0 +1,37 @@
+{
+  "projects": [
+    {
+      "id": "project1",
+      "name": "New Design System",
+      "description": "Create a comprehensive design system for all company products",
+      "status": "inProgress",
+      "progress": 27,
+      "leadId": "user1",
+      "teamMembers": ["user1", "user2", "user3"],
+      "dueDate": "2023-03-27",
+      "icon": "design"
+    },
+    {
+      "id": "project2",
+      "name": "User Interface Redesign for Webx",
+      "description": "Redesign the user interface for the Webx platform to improve usability",
+      "status": "inProgress",
+      "progress": 63,
+      "leadId": "user2",
+      "teamMembers": ["user1", "user2"],
+      "dueDate": "2023-04-03",
+      "icon": "web"
+    },
+    {
+      "id": "project3",
+      "name": "New Email Templates Design Project",
+      "description": "Design new email templates for marketing campaigns",
+      "status": "pending",
+      "progress": 10,
+      "leadId": "user3",
+      "teamMembers": ["user3"],
+      "dueDate": "2023-04-19",
+      "icon": "email"
+    }
+  ]
+}

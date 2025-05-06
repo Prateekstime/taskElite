@@ -1,0 +1,36 @@
+{
+  "users": [
+    {
+      "id": "user1",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "password": "password123",
+      "role": "user",
+      "avatar": "/placeholder.svg?height=32&width=32"
+    },
+    {
+      "id": "user2",
+      "name": "Sarah Johnson",
+      "email": "sarah@example.com",
+      "password": "password123",
+      "role": "user",
+      "avatar": "/placeholder.svg?height=32&width=32"
+    },
+    {
+      "id": "user3",
+      "name": "Michael Chen",
+      "email": "michael@example.com",
+      "password": "password123",
+      "role": "user",
+      "avatar": "/placeholder.svg?height=32&width=32"
+    },
+    {
+      "id": "admin1",
+      "name": "Admin User",
+      "email": "admin@example.com",
+      "password": "admin123",
+      "role": "admin",
+      "avatar": "/placeholder.svg?height=32&width=32"
+    }
+  ]
+}

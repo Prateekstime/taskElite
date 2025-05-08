@@ -70,7 +70,7 @@ exports.register = async (req, res) => {
 
 // User update logic (allows user to update name, email, avatar)
 exports.updateUser = async (req, res) => {
-  const userId = req.user.id;  n
+  const userId = req.user.id;  
   const { name, email, avatar } = req.body;
 
   try {
@@ -93,14 +93,12 @@ exports.updateUser = async (req, res) => {
 
 exports.getUser = async (req, res) => {
   const userId = req.params.id; 
-  console.log(userId) // Extract user id from JWT token
+  // console.log(userId) // Extract user id from JWT token
 
 
   try {
     // Update the user's information
-    const user = await User.findById(
-      userId
-    );
+    const user = await User.findById(userId);
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });

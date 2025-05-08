@@ -1,12 +1,22 @@
+const Project = require('../models/projectModel');
+
+
+
 exports.createProject = async (req, res) => {
-    const { id, name, description, status, progress, leadId, teamMembers, dueDate, icon } = req.body;
-  
+    const { name, description, status, progress, leadId, teamMembers, dueDate, icon } = req.body;
+    const id = `project_${new Date().toISOString() }` // Generate a unique ID for the project
     try {
+      let existingProject = await Project.findOne({ id });
+
+      if (existingProject){
+        return res.status(400).json({ message: 'Project already exists' });
+      };
+
       const project = new Project({
         id, name, description, status, progress, leadId, teamMembers, dueDate, icon
       });
       await project.save();
-      res.status(201).json(project);
+      res.status(201).json("Project created ",project);
     } catch (error) {
       res.status(400).json({ message: 'Error creating project', error });
     }
@@ -24,6 +34,7 @@ exports.createProject = async (req, res) => {
   
   // Get project by ID (Admin or authorized user)
   exports.getProjectById = async (req, res) => {
+
     try {
       const project = await Project.findById(req.params.id);
       if (!project) {
@@ -38,10 +49,10 @@ exports.createProject = async (req, res) => {
   // Update project (Admin only)
   exports.updateProject = async (req, res) => {
     const { name, description, status, progress, leadId, teamMembers, dueDate, icon } = req.body;
-  
+    const projectId = req.params.id; // Extract project ID from request parameters
     try {
       const updatedProject = await Project.findByIdAndUpdate(
-        req.params.id,
+        projectId,
         { name, description, status, progress, leadId, teamMembers, dueDate, icon },
         { new: true } // Returns the updated project
       );

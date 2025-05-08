@@ -5,6 +5,7 @@ const { verifyToken, isAdmin } = require('../middleware/authMiddleware');
 
 const router = express.Router();
 router.get('/healthCheck', healthCheck)
+
 // Login route (public)
 router.post('/login', login);
 

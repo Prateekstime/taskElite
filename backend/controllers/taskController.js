@@ -28,12 +28,12 @@ exports.createTask = async (req, res) => {
 
 // Get all tasks (Admin only)
 exports.getAllTasks = async (req, res) => {
-  console.log("getAllTask1")
+  // console.log("getAllTask")
   try {
     const tasks = await Task.find();
-    console.log("getAllTask2")
+    // console.log("getAllTask2")
     res.status(200).json(tasks,"got all tasks");
-    console.log("got all tasks")
+    // console.log("got all tasks")
   } catch (error) {
     res.status(400).json({ message: 'Error fetching tasks', error });
   }
@@ -41,6 +41,7 @@ exports.getAllTasks = async (req, res) => {
 
 // Get task by ID (Admin or authorized user)
 exports.getTaskById = async (req, res) => {
+  // const taskId = req.params.id; 
   try {
     const task = await Task.findById(req.params.id);
     if (!task) {
@@ -55,10 +56,10 @@ exports.getTaskById = async (req, res) => {
 // Update task (Admin only)
 exports.updateTask = async (req, res) => {
   const { title, description, status, priority, assignedTo, dueDate, completedDate, startTime } = req.body;
-
+  const taskId = req.params.id; // Extract task ID from request parameters
   try {
     const updatedTask = await Task.findByIdAndUpdate(
-      req.params.id,
+      taskId,
       { title, description, status, priority, assignedTo, dueDate, completedDate, startTime },
       { new: true } // Returns the updated task
     );
@@ -75,7 +76,8 @@ exports.updateTask = async (req, res) => {
 // Delete task (Admin only)
 exports.deleteTask = async (req, res) => {
   try {
-    const task = await Task.findByIdAndDelete(req.params.id);
+    const taskId = req.params.id; // Extract task ID from request parameters
+    const task = await Task.findByIdAndDelete(taskId);
     if (!task) {
       return res.status(404).json({ message: 'Task not found' });
     }

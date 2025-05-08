@@ -7,7 +7,6 @@ import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { tasks } from "@/constants/tasks.json"
 import { users } from "@/constants/users.json"
 import { Plus, MoreHorizontal } from "lucide-react"
 import { TaskDialog } from "@/components/task-dialog"
@@ -17,6 +16,7 @@ import {  getToken } from "@/lib/auth"
 import axios from "axios"
 
 export function FilteredAdminTasks() {
+  const [filteredTasks, setFilteredTasks] = useState([])
   const [isTaskDialogOpen, setIsTaskDialogOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [filters, setFilters] = useState<TaskFiltersType>({
@@ -34,7 +34,8 @@ export function FilteredAdminTasks() {
       }
     
     });
-    console.log(response.data)
+    console.log("task here",response.data);
+    setFilteredTasks(response.data)
   }
   
   useEffect(() => {
@@ -42,32 +43,31 @@ export function FilteredAdminTasks() {
     
   },[])
 
-  const [filteredTasks, setFilteredTasks] = useState(tasks)
 
   // Apply filters and search
   useEffect(() => {
     // Apply search
-    let result = tasks
+    let result = filteredTasks
     if (searchQuery) {
       const query = searchQuery.toLowerCase()
       result = result.filter(
-        (task) => task.title.toLowerCase().includes(query) || task.description.toLowerCase().includes(query),
+        (task:any) => task?.title.toLowerCase().includes(query) || task.description.toLowerCase().includes(query),
       )
     }
 
     // Apply status filter
     if (filters.status.length > 0) {
-      result = result.filter((task) => filters.status.includes(task.status))
+      result = result.filter((task:any) => filters.status.includes(task.status))
     }
 
     // Apply priority filter
     if (filters.priority.length > 0) {
-      result = result.filter((task) => filters.priority.includes(task.priority))
+      result = result.filter((task:any) => filters.priority.includes(task.priority))
     }
 
     // Apply assignee filter
     if (filters.assignedTo.length > 0) {
-      result = result.filter((task) => filters.assignedTo.includes(task.assignedTo))
+      result = result.filter((task:any) => filters.assignedTo.includes(task.assignedTo))
     }
 
     // Apply due date filter
@@ -84,7 +84,7 @@ export function FilteredAdminTasks() {
       const nextMonth = new Date(today)
       nextMonth.setMonth(nextMonth.getMonth() + 1)
 
-      result = result.filter((task) => {
+      result = result.filter((task:any) => {
         const taskDate = new Date(task.dueDate)
         taskDate.setHours(0, 0, 0, 0)
 
@@ -144,7 +144,7 @@ export function FilteredAdminTasks() {
           <p className="text-gray-500 mt-1">Manage and track all team tasks</p>
         </div>
         <Button className="bg-blue-500 hover:bg-blue-600" onClick={() => setIsTaskDialogOpen(true)}>
-          {/* <Plus className="mr-2 h-4 w-4" /> */}
+          <Plus className="mr-2 h-4 w-4" />
           Add Task
         </Button>
       </div>
@@ -179,10 +179,10 @@ export function FilteredAdminTasks() {
             </TableHeader>
             <TableBody>
               {filteredTasks.length > 0 ? (
-                filteredTasks.map((task) => {
+                filteredTasks.map((task:any) => {
                   const user = getUser(task.assignedTo)
                   return (
-                    <TableRow key={task.id}>
+                    <TableRow key={task.taskId}>
                       <TableCell className="font-medium">{task.title}</TableCell>
                       <TableCell>
                         <div className="flex items-center gap-2">

@@ -77,6 +77,9 @@ export function Sidebar() {
           ))}
         </div>
 
+
+
+
         {/* Bottom Actions */}
         <div className="p-4 border-t border-gray-200 space-y-2 ">
           <Button variant="ghost" size="sm" className="w-full justify-start gap-3"  onClick={()=>{router.push("/settings")}}>

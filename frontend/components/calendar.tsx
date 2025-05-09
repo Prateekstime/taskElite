@@ -75,10 +75,10 @@ export function Calendar() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between  dark:bg-slate-800 dark:text-white ">
+    <div className="space-y-6 dark:bg-slate-900 rounded-md p-4">
+      <div className="flex items-center justify-between   dark:text-white ">
         <h1 className="text-3xl font-bold">Calendar</h1>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 ">
           <Button variant="outline" size="sm" onClick={goToPreviousMonth}>
             <ChevronLeft className="h-4 w-4" />
           </Button>
@@ -91,7 +91,7 @@ export function Calendar() {
         </div>
       </div>
 
-      <Card className="bg-white  dark:bg-slate-800 dark:text-white">
+      <Card className="bg-white  dark:bg-slate-800 dark:text-white m-4">
         <CardHeader className="pb-2">
           <CardTitle className="text-lg font-medium">Monthly View</CardTitle>
         </CardHeader>
@@ -113,9 +113,9 @@ export function Calendar() {
                 return (
                   <div
                     key={`${rowIndex}-${colIndex}`}
-                    className={`min-h-[100px] p-1 border  dark:bg-slate-900 dark:text-white ${
-                      isToday ? "bg-blue-50 border-blue-200   dark:bg-slate-500 dark:text-white" : "border-gray-100"
-                    } ${day === null ? "bg-gray-50 dark:bg-slate-800" : ""}`}
+                    className={`min-h-[100px] p-1 border hover:bg-slate-700 hover:translate-y-2 hover:translate-x-2 transition-all duration-500 dark:text-white ${
+                      isToday ? "bg-blue-50 border-blue-200   dark:text-white  dark:bg-blue-950" : "border-gray-100"
+                    } ${day === null ? "bg-gray-50  dark:bg-slate-800 " : ""}`}
                   >
                     {day !== null && (
                       <>

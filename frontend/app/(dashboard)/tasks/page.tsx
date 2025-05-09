@@ -9,7 +9,7 @@ import { TasksSkeleton } from "@/components/tasks-skeleton"
 export default function TasksPage() {
   const user = getUser()
   
-
+  
   return (
     <Suspense fallback={<TasksSkeleton />}>
    

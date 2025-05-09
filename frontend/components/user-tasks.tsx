@@ -18,6 +18,17 @@ export function UserTasks() {
     completed: tasks.filter((task) => task.assignedTo === user?.id && task.status === "completed"),
   })
 
+  const getAllTasks = async (Task: any) => {
+    // console.log("getAllTask")
+    try {
+      const tasks = await Task.find();
+      console.log("got all tasks", tasks)
+     ;
+      // console.log("got all tasks")
+    } catch (error) {
+     console.log({ message: 'Error fetching tasks', error });
+    }
+  };
   const handleDragEnd = (result: any) => {
     const { source, destination } = result
 
@@ -76,6 +87,7 @@ export function UserTasks() {
       <Card className="bg-white  dark:bg-slate-800 dark:text-white">
         <CardHeader className="pb-2">
           <CardTitle className="text-lg font-medium">Tasks Board</CardTitle>
+          <button onClick={getAllTasks}>get all task</button>
         </CardHeader>
         <CardContent>
           <DragDropContext onDragEnd={handleDragEnd}>

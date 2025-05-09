@@ -8,11 +8,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { users } from "@/constants/users.json"
+import { tasks } from "@/constants/tasks.json"
 import { Plus, MoreHorizontal } from "lucide-react"
 import { TaskDialog } from "@/components/task-dialog"
 import { TaskFilters, type TaskFilters as TaskFiltersType } from "@/components/task-filters"
 import { Input } from "@/components/ui/input"
 import {  getToken } from "@/lib/auth"
+
 import axios from "axios"
 
 export function FilteredAdminTasks() {
@@ -135,7 +137,25 @@ export function FilteredAdminTasks() {
   const getUser = (userId: string) => {
     return users.find((user) => user.id === userId)
   }
+  
 
+  async function getAllTasks() {
+    try {
+      const token = getToken(); // make sure getToken() returns something valid
+      const response = await axios.get("http://localhost:5000/api/tasks/getAllTasks", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      });
+  
+      console.log("All tasks fetched:", response.data);
+      setFilteredTasks(response.data);
+    } catch (error) {
+      console.error("Error fetching all tasks:", error);
+    }
+  }
+  
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -146,6 +166,10 @@ export function FilteredAdminTasks() {
         <Button className="bg-blue-500 hover:bg-blue-600" onClick={() => setIsTaskDialogOpen(true)}>
           <Plus className="mr-2 h-4 w-4" />
           Add Task
+        </Button>
+        <Button className="bg-blue-500 hover:bg-blue-600" onClick={() => getAllTasks()}>
+          <Plus className="mr-2 h-4 w-4" />
+          Get all Tasks
         </Button>
       </div>
 

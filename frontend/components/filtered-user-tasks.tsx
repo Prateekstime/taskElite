@@ -141,11 +141,11 @@ export function FilteredUserTasks() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 dark:bg-slate-800">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">My Tasks</h1>
-          <p className="text-gray-500 mt-1">Manage and organize your tasks</p>
+          <h1 className="text-3xl font-bold m-2">My Tasks</h1>
+          <p className="text-gray-500 m-2">Manage and organize your tasks</p>
         </div>
       </div>
 
@@ -161,10 +161,11 @@ export function FilteredUserTasks() {
         <TaskFilters filters={filters} onFilterChange={setFilters} />
       </div>
 
-      <Card className="bg-white">
+      <Card className="bg-white dark:bg-slate-900">
         <CardHeader className="pb-2">
-          <CardTitle className="text-lg font-medium">Tasks Board</CardTitle>
+          <CardTitle className="text-lg font-medium dark:bg-slate-900">Tasks Board</CardTitle>
         </CardHeader>
+        
         <CardContent>
           <DragDropContext onDragEnd={handleDragEnd}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

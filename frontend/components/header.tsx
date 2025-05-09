@@ -55,10 +55,10 @@ export function Header() {
                   <X className="h-5 w-5" />
                 </Button>
 
-                <Button variant="ghost" size="icon" className="relative border-none">
+                
                   <ThemeToggle />
                  
-                </Button>
+                
 
                 <Dialog open={isProfileOpen} onOpenChange={setIsProfileOpen} >
                   <DialogTrigger asChild>

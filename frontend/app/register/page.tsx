@@ -1,14 +1,14 @@
 "use client"
 
 import type React from "react"
-
-import { useState } from "react"
+import axios from "axios"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
-import { users } from "@/constants/users.json"
+// import { users } from "@/constants/users.json"
 import { setUser } from "@/lib/auth"
 // import { register } from "module"
 
@@ -20,30 +20,58 @@ export default function RegistrationPage() {
   const [error, setError] = useState("")
   const router = useRouter()
 
-  const handleRegistration = (e: React.FormEvent) => {
-    e.preventDefault()
-    setError("")
+  // useEffect(() => {
+  //   handleRegistration
+  // }, [])
 
-    const user = users.find((u) => u.email === email && u.password === password)
-
-    if (user) {
-      setUser({
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        avatar: `https://avatar.iran.liara.run/username?username=${user?.name}`,
-
-      })
-      router.push("/login")
+  const handleRegistration = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+  
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
     }
-    else if( password != confirmPassword){
-       setError("Password didn't Matched")
-
-    } else {
-      setError("Try Strong password")
+  
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters long");
+      return;
     }
-  }
+  
+    try {
+      const response = await axios.post("http://localhost:5000/api/users/register", {
+        name: fullName,
+        email,
+        password,
+        role: "user",
+      }, {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+  
+      if (response.status === 201) {
+        const user = response.data;
+  
+        setUser({
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+          avatar: `https://avatar.iran.liara.run/username?username=${user?.name}`,
+        });
+  
+        router.push("/login");
+      }
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      } 
+      else {
+        setError("Registration failed");
+      }
+    }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
@@ -99,9 +127,7 @@ export default function RegistrationPage() {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label htmlFor="password">Password</Label>
-                {/* <Button variant="link" className="p-0 h-auto text-xs">
-                  Forgot password?
-                </Button> */}
+              
               </div>
               <Input
                 id="password"
@@ -139,7 +165,7 @@ export default function RegistrationPage() {
                         
                     } text-gray transition-colors`}>Alrady Registered </p>
                         <Button
-                    type="submit"
+                    
                     className={`w-full   ${
                      email || password || fullName
                         ? ' bg-black-900 transition-all duration-1000 '

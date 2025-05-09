@@ -18,6 +18,12 @@ export function ProjectsList() {
     return users.find((user) => user.id === userId)
   }
 
+  const getProjectById = (projectId: string) => {
+    return projects.findAll((project) => project.id === projectId)
+  }
+
+
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case "completed":
@@ -42,7 +48,7 @@ export function ProjectsList() {
 
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 dark:bg-gray-900 bg-gray-50 p-6 rounded-lg">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Projects</h1>

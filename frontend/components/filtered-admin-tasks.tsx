@@ -167,10 +167,10 @@ export function FilteredAdminTasks() {
           <Plus className="mr-2 h-4 w-4" />
           Add Task
         </Button>
-        <Button className="bg-blue-500 hover:bg-blue-600" onClick={() => getAllTasks()}>
+        {/* <Button className="bg-blue-500 hover:bg-blue-600" onClick={() => getAllTasks()}>
           <Plus className="mr-2 h-4 w-4" />
           Get all Tasks
-        </Button>
+        </Button> */}
       </div>
 
       <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">

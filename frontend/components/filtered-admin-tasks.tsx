@@ -140,21 +140,21 @@ export function FilteredAdminTasks() {
   
 
   async function getAllTasks() {
-    try {
-      const token = getToken(); // make sure getToken() returns something valid
-      const response = await axios.get("http://localhost:5000/api/tasks/getAllTasks", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      });
-  
-      console.log("All tasks fetched:", response.data);
-      setFilteredTasks(response.data);
-    } catch (error) {
-      console.error("Error fetching all tasks:", error);
-    }
+  try {
+    const token = getToken(); 
+    const response = await axios.get("http://localhost:5000/api/tasks/getTasks", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+
+    console.log("All tasks fetched:", response.data);
+    setFilteredTasks(response.data);
+  } catch (error) {
+    console.error("Error fetching all tasks:", error);
   }
+}
   
   return (
     <div className="space-y-6">
@@ -167,10 +167,10 @@ export function FilteredAdminTasks() {
           <Plus className="mr-2 h-4 w-4" />
           Add Task
         </Button>
-        {/* <Button className="bg-blue-500 hover:bg-blue-600" onClick={() => getAllTasks()}>
+        <Button className="bg-blue-500 hover:bg-blue-600" onClick={() => getAllTasks()}>
           <Plus className="mr-2 h-4 w-4" />
           Get all Tasks
-        </Button> */}
+        </Button>
       </div>
 
       <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
@@ -241,7 +241,7 @@ export function FilteredAdminTasks() {
                             <DropdownMenuItem>View Details</DropdownMenuItem>
                             <DropdownMenuItem>Edit Task</DropdownMenuItem>
                             <DropdownMenuItem>Reassign</DropdownMenuItem>
-                            <DropdownMenuItem>Delete Task</DropdownMenuItem>
+                            <DropdownMenuItem >Delete Task</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </TableCell>

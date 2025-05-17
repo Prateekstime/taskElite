@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { users } from "@/constants/users.json"
-import { tasks } from "@/constants/tasks.json"
+
 import { Plus, MoreHorizontal } from "lucide-react"
 import { TaskDialog } from "@/components/task-dialog"
 import { TaskFilters, type TaskFilters as TaskFiltersType } from "@/components/task-filters"
@@ -37,8 +37,9 @@ export function FilteredAdminTasks() {
     
     });
     console.log("task here",response.data);
-    setFilteredTasks(response.data)
+    setFilteredTasks(response.data.tasks);
   }
+
   
   useEffect(() => {
     fetchTasks()
@@ -167,10 +168,7 @@ export function FilteredAdminTasks() {
           <Plus className="mr-2 h-4 w-4" />
           Add Task
         </Button>
-        <Button className="bg-blue-500 hover:bg-blue-600" onClick={() => getAllTasks()}>
-          <Plus className="mr-2 h-4 w-4" />
-          Get all Tasks
-        </Button>
+       
       </div>
 
       <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
@@ -185,7 +183,7 @@ export function FilteredAdminTasks() {
         <TaskFilters filters={filters} onFilterChange={setFilters} />
       </div>
 
-      <Card className="bg-white">
+      <Card className="bg-white dark:bg-gray-800">
         <CardHeader className="pb-2">
           <CardTitle className="text-lg font-medium">Tasks Overview</CardTitle>
         </CardHeader>

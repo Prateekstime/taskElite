@@ -28,16 +28,32 @@ exports.createTask = async (req, res) => {
 
 // Get all tasks (Admin only)
 exports.getAllTasks = async (req, res) => {
-  // console.log("getAllTask")
   try {
-    const tasks = await Task.find();
-    // console.log("getAllTask2")
-    res.status(200).json(tasks,"got all tasks");
-    // console.log("got all tasks")
+    const { assignedTo, dueDate, priority, status } = req.query;
+
+    // Dynamically build filter object
+    const filter = {};
+
+    if (assignedTo) filter.assignedTo = assignedTo;
+    if (dueDate) filter.dueDate = dueDate // Ensure date is properly parsed
+    if (priority) filter.priority = priority;
+    if (status) filter.status = status;
+
+    const tasks = await Task.find(filter);
+
+    res.status(200).json({
+      message: "Tasks retrieved successfully",
+      count: tasks.length,
+      tasks,
+    });
   } catch (error) {
-    res.status(400).json({ message: 'Error fetching tasks', error });
+    res.status(400).json({
+      message: 'Error fetching tasks',
+      error: error.message,
+    });
   }
 };
+
 
 // Get task by ID (Admin or authorized user)
 exports.getTaskById = async (req, res) => {

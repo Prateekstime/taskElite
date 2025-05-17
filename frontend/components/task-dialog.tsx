@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import axios from "axios"
 
 import { useState } from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
@@ -10,7 +11,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { users } from "@/constants/users.json"
-import { getUser } from "@/lib/auth"
+import { getUser,getToken } from "@/lib/auth"
 
 interface TaskDialogProps {
   open: boolean
@@ -27,7 +28,7 @@ export function TaskDialog({ open, onOpenChange }: TaskDialogProps) {
   const [dueDate, setDueDate] = useState("")
   const [priority, setPriority] = useState("medium")
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     // In a real app, this would save the task to the database
@@ -38,8 +39,33 @@ export function TaskDialog({ open, onOpenChange }: TaskDialogProps) {
       dueDate,
       priority,
       status: "todo",
-    })
 
+    })
+   const token = getToken()
+    console.log("token",token)
+  
+let data = JSON.stringify({
+  "title": title,
+  "description": description,
+  "status": "todo",
+  "priority": priority,
+  "assignedTo": assignedTo,
+  "dueDate": dueDate,
+  "completedDate": null,
+  "startTime": Date.now(),
+});
+
+
+const response =await axios.post('http://localhost:5000/api/tasks/task', data, {
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  }
+})
+console.log(response.data);
+ 
+    
+    
     // Reset form and close dialog
     resetForm()
     onOpenChange(false)

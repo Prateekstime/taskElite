@@ -64,6 +64,10 @@ export function TaskFilters({ filters, onFilterChange }: TaskFiltersProps) {
   const activeFilterCount =
     filters.status.length + filters.priority.length + filters.assignedTo.length + (filters.dueDate ? 1 : 0)
 
+  function submitFilter() {
+    onFilterChange(tempFilters)
+    setIsOpen(false)
+  };
   return (
     <div className="flex items-center gap-2">
       <Popover open={isOpen} onOpenChange={setIsOpen}>
@@ -161,6 +165,7 @@ export function TaskFilters({ filters, onFilterChange }: TaskFiltersProps) {
                 </SelectContent>
               </Select>
             </div>
+            <button className="bg-blue-500 px-4 rounded-md flex p-1 text-white" onClick={submitFilter}>Search filter</button>
           </div>
         </PopoverContent>
       </Popover>

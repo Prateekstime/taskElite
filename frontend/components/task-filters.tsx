@@ -65,7 +65,7 @@ export function TaskFilters({ filters, onFilterChange }: TaskFiltersProps) {
     filters.status.length + filters.priority.length + filters.assignedTo.length + (filters.dueDate ? 1 : 0)
 
   function submitFilter() {
-    onFilterChange(tempFilters)
+    onFilterChange(filters)
     setIsOpen(false)
   };
   return (

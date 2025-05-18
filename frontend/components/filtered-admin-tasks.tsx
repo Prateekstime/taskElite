@@ -183,7 +183,7 @@ export function FilteredAdminTasks() {
         <TaskFilters filters={filters} onFilterChange={setFilters} />
       </div>
 
-      <Card className="bg-white dark:bg-gray-800">
+      <Card className="bg-white dark">
         <CardHeader className="pb-2">
           <CardTitle className="text-lg font-medium">Tasks Overview</CardTitle>
         </CardHeader>
